@@ -1,0 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Figtree:wght@300&display=swap');
+body {
+    margin: 0;
+    font-family: "Figtree", serif !important;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-image: linear-gradient(to left, rgb(228 235 204), rgb(235 240 220));
+  }

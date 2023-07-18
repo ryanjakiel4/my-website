@@ -1,6 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled, { createGlobalStyle } from "styled-components";
-import { Link, Element, scroller } from 'react-scroll'
+import { Link, Element, scroller } from 'react-scroll';
+import {
+    IoMdHome
+  } from "react-icons/io";
+import {
+    IoAlbums,
+    IoDocument,
+    IoPerson,
+    IoFootsteps
+  } from "react-icons/io5";
 
 
 function App() {
@@ -27,18 +36,73 @@ function App() {
       <CSSReset />
 
       <Navbar.Wrapper>
-        <Navbar.Logo>Logo</Navbar.Logo>
+        <Navbar.Logo>RJ</Navbar.Logo>
 
         <HamburgerButton.Wrapper onClick={() => toggleDrawer(true)}>
           <HamburgerButton.Lines />
         </HamburgerButton.Wrapper>
 
         <Navbar.Items ref={drawerRef} openDrawer={openDrawer}>
-          <Navbar.Item><Link activeClass="active" to="home" spy={true} smooth={true} duration={500} >Home</Link></Navbar.Item>
-          <Navbar.Item><Link activeClass="active" to="about" spy={true} smooth={true} duration={500}>About</Link></Navbar.Item>
-          <Navbar.Item><Link activeClass="active" to="projects" spy={true} smooth={true} duration={500}>Projects</Link></Navbar.Item>
-          <Navbar.Item><Link activeClass="active" to="resume" spy={true} smooth={true} duration={500}>Resume</Link></Navbar.Item>
-          <Navbar.Item><Link activeClass="active" to="tutorials" spy={true} smooth={true} duration={500}>Tutorials</Link></Navbar.Item>
+          <Navbar.Item>
+            <Link activeClass="active" to="home" spy={true} smooth={true} duration={500}>
+                <Navbar.Link>
+                  <Navbar.Icon>
+                    <IoMdHome /> 
+                  </Navbar.Icon>
+                  <Navbar.Text>
+                    Home 
+                  </Navbar.Text>
+                </Navbar.Link>
+            </Link>
+          </Navbar.Item>
+          <Navbar.Item>
+            <Link activeClass="active" to="about" spy={true} smooth={true} duration={500}>
+              <Navbar.Link>
+                <Navbar.Icon>
+                  <IoPerson /> 
+                </Navbar.Icon>
+                <Navbar.Text>
+                  About 
+                </Navbar.Text>
+              </Navbar.Link>
+            </Link>
+          </Navbar.Item>
+          <Navbar.Item>
+            <Link activeClass="active" to="projects" spy={true} smooth={true} duration={500}>
+              <Navbar.Link>
+                <Navbar.Icon>
+                  <IoAlbums /> 
+                </Navbar.Icon>
+                <Navbar.Text>
+                  Projects 
+                </Navbar.Text>
+              </Navbar.Link>
+            </Link>
+          </Navbar.Item>
+          <Navbar.Item>
+            <Link activeClass="active" to="resume" spy={true} smooth={true} duration={500}>
+              <Navbar.Link>
+                <Navbar.Icon>
+                  <IoDocument /> 
+                </Navbar.Icon>
+                <Navbar.Text>
+                  Resume 
+                </Navbar.Text>
+              </Navbar.Link>
+            </Link>
+          </Navbar.Item>
+          <Navbar.Item>
+            <Link activeClass="active" to="tutorials" spy={true} smooth={true} duration={500}>
+              <Navbar.Link>
+                <Navbar.Icon>
+                  <IoFootsteps /> 
+                </Navbar.Icon>
+                <Navbar.Text>
+                  Tutorials 
+                </Navbar.Text>
+              </Navbar.Link>
+            </Link>
+          </Navbar.Item>
         </Navbar.Items>
       </Navbar.Wrapper>
       </Styles.Wrapper>
@@ -201,7 +265,7 @@ const Styles = {
     box-shadow: 0px 5px 5px -7px;
     height: 70px;
     // 40em == 640px
-    @media only screen and (max-width: 40em) {
+    @media only screen and (max-width: 42em) {
       
       bottom: 0;
       background-color: white;
@@ -224,15 +288,18 @@ const Navbar = {
     width: 100vw;
     height: 60px;
   `,
-  Logo: styled.h1`
-    border: 1px solid gray;
-    padding: 0.5rem 1rem;
+  Logo: styled.div`
+    color: rgb(0,0,128);
+    padding-top: 10px;
+    font-size: 60px;
   `,
   Items: styled.ul`
-    display: flex;
     list-style: none;
+    padding-top: 20px;
+    font-size: 20px;
+    display: flex;
 
-    @media only screen and (max-width: 40em) {
+    @media only screen and (max-width: 42em) {
       position: fixed;
       right: 0;
       top: 0;
@@ -254,21 +321,34 @@ const Navbar = {
     padding: 0 1rem;
     cursor: pointer;
 
-    @media only screen and (max-width: 40em) {
+    @media only screen and (max-width: 42em) {
       padding: 1rem 0;
     }
+  `,
+  Link: styled.div`
+    display: flex;
+  `,
+  Icon: styled.div`
+  text-align: center;
+  flex: 1;
+  padding-right: 7px;
+  padding-top: 2px;
+  `,
+  Text: styled.div`
+  text-align: center;
+  flex: 1;
   `,
   TopSpace: styled.div`
     position: relative;
     height: 70px;
-    @media only screen and (max-width: 40em) {
+    @media only screen and (max-width: 42em) {
       height: 0px;
     }
   `,
   BottomSpace: styled.div`
     position: relative;
     height: 0px;
-    @media only screen and (max-width: 40em) {
+    @media only screen and (max-width: 42em) {
       height: 70px;
     }
   `
@@ -297,7 +377,7 @@ const HamburgerButton = {
 
     display: none;
 
-    @media only screen and (max-width: 40em) {
+    @media only screen and (max-width: 42em) {
       display: block;
     }
 
