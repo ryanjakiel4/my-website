@@ -1,6 +1,10 @@
 import React from 'react';
 import styled from "styled-components";
 
+/*
+Component which makes its children have a fade-in animation from the bottom.
+*/
+
 function FadeInSection(props) {
   const [isVisible, setVisible] = React.useState(false);
   const domRef = React.useRef();

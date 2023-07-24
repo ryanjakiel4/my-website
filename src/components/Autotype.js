@@ -1,5 +1,10 @@
 import Typewriter from "typewriter-effect";
 
+/*
+Eye-catching typing animation
+https://www.npmjs.com/package/typewriter-effect
+*/
+
 function Autotype() {
   return (
     <Typewriter

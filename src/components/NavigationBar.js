@@ -9,6 +9,12 @@ import {
   IoPerson,
 } from "react-icons/io5";
 
+/*
+Navigation bar with named tabs with icons in desktop mode, and with a hamburger button
+revealing a menu in mobile mode.  The condition for entering mobile mode is a width smaller
+than 42em, where 'em' is a unit of pixels equal to the font-size of the section.
+*/
+
 function NavigationBar() {
   const [openDrawer, toggleDrawer] = useState(false);
   const drawerRef = useRef(null);

@@ -1,9 +1,14 @@
 import styled from "styled-components";
 import { Element } from 'react-scroll';
+
 import Autotype from "./components/Autotype";
 import FadeInSection from "./components/FadeInSection";
 import NavigationBar from "./components/NavigationBar";
 import ContactBar from "./components/ContactBar";
+
+/*
+Main js file for the website, additional comments can be found in the component files.
+*/
 
 function App() {
   return (
