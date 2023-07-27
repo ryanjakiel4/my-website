@@ -104,7 +104,7 @@ class FiftyStates extends React.Component {
     let currentTimeSeconds = Date.now() / 1000;
     let timeElaspedSeconds = currentTimeSeconds - this.startTimeSeconds;
 
-    if (timeElaspedSeconds >= 3000) {
+    if (timeElaspedSeconds >= this.gameDurationSeconds) {
       this.gameLost();
     }
     else if (this.wonGame) {
