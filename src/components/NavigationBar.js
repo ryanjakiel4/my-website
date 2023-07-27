@@ -7,6 +7,7 @@ import {
   IoAlbums,
   IoDocument,
   IoPerson,
+  IoGameController
 } from "react-icons/io5";
 
 /*
@@ -87,6 +88,18 @@ function NavigationBar() {
                 </Navbar.Icon>
                 <Navbar.Text>
                   Resume
+                </Navbar.Text>
+              </Navbar.Link>
+            </Link>
+          </Navbar.Item>
+          <Navbar.Item>
+            <Link activeClass="active" to="games" spy={true} smooth={true} isDynamic={true} duration={500}>
+              <Navbar.Link>
+                <Navbar.Icon>
+                  <IoGameController />
+                </Navbar.Icon>
+                <Navbar.Text>
+                  Games
                 </Navbar.Text>
               </Navbar.Link>
             </Link>

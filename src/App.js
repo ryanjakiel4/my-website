@@ -5,6 +5,7 @@ import Autotype from "./components/Autotype";
 import FadeInSection from "./components/FadeInSection";
 import NavigationBar from "./components/NavigationBar";
 import ContactBar from "./components/ContactBar";
+import GameMenu from "./components/GameMenu";
 
 /*
 Main js file for the website, additional comments can be found in the component files.
@@ -124,6 +125,12 @@ function App() {
         <Section.Content>
           <ContactBar />
         </Section.Content>
+        <Section.Header name="games">
+          Games
+        </Section.Header>
+        <Section.Content>
+          <GameMenu />
+        </Section.Content>
       </Section.Wrapper>
     </Background.Wrapper>
   );
@@ -131,7 +138,8 @@ function App() {
 
 const Background = {
   Wrapper: styled.div`
-    background-image: linear-gradient(rgba(0,0,200,0), rgba(0,100,225,.1), rgba(0,0,200,0), rgba(100,200,250,.1))`
+    background-image: linear-gradient(rgba(0,0,200,0), rgba(0,100,225,.1), rgba(0,0,200,0), rgba(100,200,250,.1));
+    `
 }
 
 const Section = {
