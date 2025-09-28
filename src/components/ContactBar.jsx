@@ -18,7 +18,7 @@ function ContactBar() {
       <Contactbar.Item>
         <Button
           variant="primary"
-          href={require("../resources/RyanJakielResume.pdf")}
+          href="/src/resources/RyanJakielResume.pdf"
           target="_blank"
           style={{ maxWidth: "250px" }}
         >

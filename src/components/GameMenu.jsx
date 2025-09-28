@@ -9,9 +9,17 @@ function GameMenu() {
     <GamesList.Items>
       <GamesList.Item>
         <Link to={"/FiftyStates"}>
-          <GamesList.Image src={require("../resources/usa.jpg")} />
+          <GamesList.Image src="/src/resources/usa.jpg" />
           <GamesList.Title>
             Can you name all 50 states?
+          </GamesList.Title>
+        </Link>
+      </GamesList.Item>
+      <GamesList.Item>
+        <Link to={"/Yahtzee"}>
+          <GamesList.Image src="/src/resources/dice.svg" />
+          <GamesList.Title>
+            Play Yahtzee
           </GamesList.Title>
         </Link>
       </GamesList.Item>
