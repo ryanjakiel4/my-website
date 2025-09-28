@@ -34,7 +34,7 @@ function App() {
         <FadeInSection>
           <Section.Content>
             <Section.Left>
-              <Image.AboutMe src="/src/resources/AllisonandI.jpg" />
+              <Image.AboutMe src="/resources/AllisonandI.jpg" />
             </Section.Left>
             <Section.Right>
               My wife, Allison, and I moved to Birmingham, Alabama in June of 2023 while she attends Christ Health Center's family medicine residency
@@ -72,14 +72,14 @@ function App() {
               for 18 months without any operational issues.
             </Section.Left>
             <Section.Right>
-              <Image.AWS src="/src/resources/aws.jpg" />
+              <Image.AWS src="/resources/aws.jpg" />
             </Section.Right>
           </Section.ContentReverse>
         </FadeInSection>
         <FadeInSection>
           <Section.Content>
             <Section.Left>
-              <Image.Fblite src="/src/resources/Fblite.jpg" />
+              <Image.Fblite src="/resources/Fblite.jpg" />
             </Section.Left>
             <Section.Right>
               During my internship at Facebook, I worked as a front-end developer and implemented the settings menu for Facebook Lite Stories,
@@ -99,14 +99,14 @@ function App() {
               capstone project at the Virginia Tech Undergraduate Research in Computer Science (VTURCS).
             </Section.Left>
             <Section.Right>
-              <Image.Barklight src="/src/resources/Barklight.jpg" />
+              <Image.Barklight src="/resources/Barklight.jpg" />
             </Section.Right>
           </Section.ContentReverse>
         </FadeInSection>
         <FadeInSection>
           <Section.Content>
             <Section.Left>
-              <Image.Myo src="/src/resources/Myo.jpg" />
+              <Image.Myo src="/resources/Myo.jpg" />
             </Section.Left>
             <Section.Right>
               I had the opportunity to take several advanced CS courses in high school, including Artificial

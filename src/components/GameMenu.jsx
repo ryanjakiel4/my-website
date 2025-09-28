@@ -9,17 +9,17 @@ function GameMenu() {
     <GamesList.Items>
       <GamesList.Item>
         <Link to={"/FiftyStates"}>
-          <GamesList.Image src="/src/resources/usa.jpg" />
+          <GamesList.Image src="/resources/usa.jpg" />
           <GamesList.Title>
             Can you name all 50 states?
           </GamesList.Title>
         </Link>
       </GamesList.Item>
       <GamesList.Item>
-        <Link to={"/Yahtzee"}>
-          <GamesList.Image src="/src/resources/dice.svg" />
+        <Link to={"/RollCall"}>
+          <GamesList.Image src="/resources/dice.svg" />
           <GamesList.Title>
-            Play Yahtzee
+            Play Roll Call
           </GamesList.Title>
         </Link>
       </GamesList.Item>

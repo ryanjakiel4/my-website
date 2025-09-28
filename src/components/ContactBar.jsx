@@ -18,7 +18,7 @@ function ContactBar() {
       <Contactbar.Item>
         <Button
           variant="primary"
-          href="/src/resources/RyanJakielResume.pdf"
+          href="/resources/RyanJakielResume.pdf"
           target="_blank"
           style={{ maxWidth: "250px" }}
         >

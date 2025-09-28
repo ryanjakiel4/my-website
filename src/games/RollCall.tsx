@@ -26,6 +26,15 @@ const getDailySeed = (): number => {
   return Math.abs(hash);
 };
 
+// Turn-specific seed generator - creates a unique seed for each turn
+const getTurnSeed = (baseSeed: number, turn: number): number => {
+  // Combine base seed with turn number to create unique turn seed
+  let turnSeed = baseSeed + (turn * 1000000);
+  // Simple hash to ensure good distribution
+  turnSeed = ((turnSeed * 9301 + 49297) % 233280);
+  return Math.abs(turnSeed);
+};
+
 // Seeded random number generator
 class SeededRandom {
   private seed: number;
@@ -44,7 +53,7 @@ class SeededRandom {
   }
 }
 
-const Yahtzee: React.FC = () => {
+const RollCall: React.FC = () => {
   const [dice, setDice] = useState<Dice[]>([
     { value: 0, kept: false },
     { value: 0, kept: false },
@@ -56,7 +65,7 @@ const Yahtzee: React.FC = () => {
   const [gameStarted, setGameStarted] = useState(false);
   const [gameOver, setGameOver] = useState(false);
   const [currentTurn, setCurrentTurn] = useState(1);
-  const [randomGenerator, setRandomGenerator] = useState<SeededRandom | null>(null);
+  const [baseSeed, setBaseSeed] = useState<number>(0);
   const [totalScore, setTotalScore] = useState(0);
   const [yahtzeeBonus, setYahtzeeBonus] = useState(0);
   const [scoreSelected, setScoreSelected] = useState(false);
@@ -81,7 +90,7 @@ const Yahtzee: React.FC = () => {
   // Initialize the game with daily seed
   useEffect(() => {
     const seed = getDailySeed();
-    setRandomGenerator(new SeededRandom(seed));
+    setBaseSeed(seed);
   }, []);
 
   const startGame = () => {
@@ -104,7 +113,11 @@ const Yahtzee: React.FC = () => {
   };
 
   const rollDice = () => {
-    if (!randomGenerator || rollsLeft <= 0) return;
+    if (rollsLeft <= 0) return;
+
+    // Create a new random generator for this turn
+    const turnSeed = getTurnSeed(baseSeed, currentTurn);
+    const randomGenerator = new SeededRandom(turnSeed);
 
     setDice(prev => prev.map(die => 
       die.kept ? die : { ...die, value: randomGenerator.nextInt(1, 6) }
@@ -219,10 +232,18 @@ const Yahtzee: React.FC = () => {
       i === selectedCategory ? { ...cat, score } : cat
     ));
 
-    // Update total score including Yahtzee bonus
+    // Calculate upper section total (categories 0-5: Ones through Sixes)
+    const upperSectionTotal = scoreCategories.slice(0, 6).reduce((sum, cat, i) => 
+      sum + (i === selectedCategory ? score : (cat.score || 0)), 0
+    );
+    
+    // Calculate upper section bonus (35 points if upper section total >= 63)
+    const upperSectionBonus = upperSectionTotal >= 63 ? 35 : 0;
+    
+    // Update total score including Yahtzee bonus and upper section bonus
     const newTotal = scoreCategories.reduce((sum, cat, i) => 
       sum + (i === selectedCategory ? score : (cat.score || 0)), 0
-    ) + yahtzeeBonus + (isYahtzee && yahtzeeAlreadyFilled && !isYahtzeeCategory ? 100 : 0);
+    ) + yahtzeeBonus + (isYahtzee && yahtzeeAlreadyFilled && !isYahtzeeCategory ? 100 : 0) + upperSectionBonus;
     setTotalScore(newTotal);
 
     // Reset for next turn
@@ -252,9 +273,9 @@ const Yahtzee: React.FC = () => {
 
   return (
     <GameSpace.Wrapper>
-      <GameSpace.Title>Yahtzee</GameSpace.Title>
+      <GameSpace.Title>Roll Call</GameSpace.Title>
       <GameSpace.Info>
-        {!gameStarted ? "Roll dice and score points! Each day has the same random sequence for all players." : 
+        {!gameStarted ? "A daily twist on the classic dice game. Try to get the most points, everyone plays with the same rolls each day!" : 
          gameOver ? `Game Over! Final Score: ${totalScore}${yahtzeeBonus > 0 ? ` (${yahtzeeBonus} Yahtzee bonus)` : ''}` :
          `Turn ${currentTurn}/13 - ${rollsLeft} rolls left`}
       </GameSpace.Info>
@@ -323,16 +344,43 @@ const Yahtzee: React.FC = () => {
           </GameSpace.ScoreSection>
         </>
       ) : (
-        <GameSpace.ButtonHolder>
-          <GameSpace.StartButton onClick={startGame}>
-            Play Again
-          </GameSpace.StartButton>
-        </GameSpace.ButtonHolder>
+        <>
+          <GameSpace.ScoreSection>
+            <GameSpace.ScoreTitle>Final Score Breakdown</GameSpace.ScoreTitle>
+            <GameSpace.ScoreGrid>
+              {scoreCategories.map((category, index) => (
+                <GameSpace.ScoreItem
+                  key={index}
+                  used={true}
+                  selected={false}
+                >
+                  <GameSpace.ScoreName>{category.name}</GameSpace.ScoreName>
+                  <GameSpace.ScoreValue>
+                    {category.score || 0}
+                  </GameSpace.ScoreValue>
+                  <GameSpace.ScoreDescription>{category.description}</GameSpace.ScoreDescription>
+                </GameSpace.ScoreItem>
+              ))}
+            </GameSpace.ScoreGrid>
+          </GameSpace.ScoreSection>
+          
+          <GameSpace.ButtonHolder>
+            <GameSpace.StartButton onClick={startGame}>
+              Play Again
+            </GameSpace.StartButton>
+          </GameSpace.ButtonHolder>
+        </>
       )}
 
       {gameStarted && (
         <GameSpace.TotalScore>
-          Total Score: {totalScore}{yahtzeeBonus > 0 ? ` (${yahtzeeBonus} Yahtzee bonus)` : ''}
+          Total Score: {totalScore}
+          {yahtzeeBonus > 0 && ` (${yahtzeeBonus} Yahtzee bonus)`}
+          {(() => {
+            const upperSectionTotal = scoreCategories.slice(0, 6).reduce((sum, cat) => sum + (cat.score || 0), 0);
+            const upperSectionBonus = upperSectionTotal >= 63 ? 35 : 0;
+            return upperSectionBonus > 0 ? ` (${upperSectionBonus} Upper bonus)` : '';
+          })()}
         </GameSpace.TotalScore>
       )}
     </GameSpace.Wrapper>
@@ -543,4 +591,4 @@ const GameSpace = {
   `
 };
 
-export default Yahtzee;
+export default RollCall;
